@@ -1,0 +1,40 @@
+.formulario{
+    width: 32em;
+    margin-left: 5%;
+}
+
+.btn-convenio{
+    background: #14578f !important;
+    color: #fff;
+    margin-right: 1em;
+    width: 7em;
+    height: 3em;
+    padding: 0;
+    height: 35px;
+    padding: 0;
+    margin-left: 2em !important;
+}
+
+.div-titulo{
+    margin: 1em 0 4em 0;
+    border-style: solid;
+    border-width: 0 0 5px 0;
+    border-color: #14578f;
+}
+
+.titulo{
+    text-align: center;
+    font-size: 50px;
+    color: #14578f;
+    font-weight: bolder;
+}
+
+.botoes{
+    margin-top: 3em;
+    width: 40%;
+    margin-left: 32%;
+}
+
+.input{
+    float: right;
+}

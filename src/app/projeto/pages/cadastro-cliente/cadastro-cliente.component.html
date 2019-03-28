@@ -1,0 +1,80 @@
+<div class="ui-g div-titulo">
+  <div class="ui-g-12" *ngIf="!isDisabled">
+    <h3 class="titulo">Cadastro cliente</h3>
+  </div>
+</div>
+
+<form [formGroup]="formularioCliente" (ngSubmit)="salvar()">
+  <div class="formulario">
+    <div class="ui-g-6">
+        <span class="ui-float-label">
+            <label for="float-input">Nome:</label>
+            <input class="input" id="float-input" type="text" size="40" [(ngModel)]="cliente.nome" name="nome"
+          formControlName="nome" pInputText required maxlength="100"/>
+        </span>
+      </div>
+
+      <div class="ui-g-6">
+          <span class="ui-float-label">
+            <label for="float-input">CPF:</label>
+            <input class="input" id="float-input" type="text" size="40" [(ngModel)]="cliente.cpf" name="cpf"
+              formControlName="cpf" pInputText required/>
+          </span>
+        </div>
+
+      <div class="ui-g-12">
+          <div class="ui-g-6">
+              <span class="ui-float-label">
+                <label for="float-input">CEP:</label>
+                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.cep" name="cep"
+                  formControlName="cep" required (ngModelChange)="buscarCep()" maxlength="8"/>
+              </span>
+            </div>
+
+          <div class="ui-g-6">
+              <span class="ui-float-label">
+                <label for="float-input">Logradouro:</label>
+                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.logradouro" name="logradouro"
+                  formControlName="logradouro" pInputText required/>
+              </span>
+            </div>
+
+          <div class="ui-g-6">
+              <span class="ui-float-label">
+                <label for="float-input">Bairro:</label>
+                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.bairro" name="bairro"
+                  formControlName="bairro" pInputText required/>
+              </span>
+            </div>
+
+          <div class="ui-g-6">
+              <span class="ui-float-label">
+                <label for="float-input">Cidade:</label>
+                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.cidade" name="cidade"
+                  formControlName="cidade" pInputText required/>
+              </span>
+            </div>
+
+          <div class="ui-g-6">
+              <span class="ui-float-label">
+                <label for="float-input">UF:</label>
+                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.uf" name="uf"
+                  formControlName="uf" pInputTexts required/>
+              </span>
+            </div>
+
+          <!--  <div class="ui-g-6">
+                <span class="ui-float-label">
+                  <input id="float-input" type="text" size="50" [(ngModel)]="endereco.complemento" name="complemento"/>
+                  <label for="float-input">Complemento</label>
+                </span>
+              </div> -->
+      </div>
+  </div>
+  <div class="botoes">
+      <button type="button" class="btn btn-convenio" >SALVAR</button>
+      <button type="button" class="btn btn-convenio" (click)="clear()">LIMPAR</button>
+      <button type="button" class="btn btn-convenio" (click)="consultar()">CONSULTAR</button>
+  </div>
+
+</form>
