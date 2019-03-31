@@ -1,8 +1,7 @@
 import { Cliente } from './cliente';
 
-export class Telefone {
+export class Email {
     public id: number;
-    public numero: string;
-    public tipo: string;
+    public email: string;
     public cliente: Cliente;
 }

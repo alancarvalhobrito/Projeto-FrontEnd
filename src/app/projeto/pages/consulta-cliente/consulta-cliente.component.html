@@ -1,3 +1,60 @@
-<p>
-  consulta-cliente works!
-</p>
+<div class="ui-g div-titulo">
+    <div class="ui-g-12">
+      <h3 class="titulo">Consultar cliente</h3>
+    </div>
+  </div>
+
+  <h3 *ngIf="!listaClientes?.length">Nenhum cliente cadastrado!</h3>
+
+  <div class="ui-g-12">
+    <div class="ui-g-3 btn-novo">
+        <button type="button" class="btn btn-cliente" (click)="retornaTelaDeCadastro()">CADASTRAR</button>
+    </div>
+  </div>
+
+  <div *ngIf="listaClientes?.length" class="ui-g-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="coluna">Nome</th>
+            <th class="coluna">CPF</th>
+            <th class="coluna">CEP</th>
+            <th class="coluna">UF</th>
+            <th class="coluna">Cidade</th>
+            <th class="coluna" style="width: 17em;">Telefones</th>
+            <th class="coluna">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let cliente of listaClientes">
+            <tr>
+              <td>{{cliente.nome}}</td>
+              <td>{{cliente.cpf}}</td>
+              <td>{{cliente.endereco.cep}}</td>
+              <td>{{cliente.endereco.uf}}</td>
+              <td>{{cliente.endereco.cidade}}</td>
+              <td>
+                  <span>
+                    <li *ngFor="let telefone of cliente.telefones">
+                        {{telefone.tipo}} - {{telefone.numero}}
+                    </li>
+                  </span>
+              </td>
+              <td>
+                  <div class="ui-g">
+                      <div class="btn-acao">
+                          <button pButton type="button" (click)="detelharCliente(cliente)"> <span class="fa fa-th-list"></span></button>
+                      </div>
+                      <div class="btn-acao">
+                          <button pButton type="button" (click)="editarCliente(cliente)"> <span class="fa fa-pencil"></span></button>
+                      </div>
+                      <div class="btn-acao">
+                          <button pButton type="button" (click)="excluirCliente(cliente)"> <span class="fa fa-trash"></span></button>
+                      </div>
+                  </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>

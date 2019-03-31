@@ -7,6 +7,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'cadastro-cliente', pathMatch: 'full' },
   { path: 'cadastro-cliente', component: CadastroClienteComponent },
   { path: 'consulta-cliente', component: ConsultaClienteComponent },
+  { path: 'editar-cliente/:id/:disabled', component: CadastroClienteComponent },
+  { path: 'detalhar-cliente/:id/:disabled', component: CadastroClienteComponent },
   { path: '**', redirectTo: 'cadastro-cliente' }
 
 ];

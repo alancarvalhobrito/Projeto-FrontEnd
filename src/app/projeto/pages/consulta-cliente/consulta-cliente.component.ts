@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../services/cliente.service';
+import { Cliente } from '../../entity/cliente';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,10 +11,12 @@ import { ClienteService } from '../../services/cliente.service';
 })
 export class ConsultaClienteComponent implements OnInit {
 
-  listaClientes: Array<any>;
+  listaClientes: Cliente[] = new Array;
 
   constructor(
-    private clienteService:ClienteService) { }
+    private clienteService:ClienteService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.buscarClientes();
@@ -23,6 +27,24 @@ export class ConsultaClienteComponent implements OnInit {
       this.listaClientes = response;
       console.log(this.listaClientes);
     })
+  }
+
+  detelharCliente(resposta){
+    this.router.navigate([`detalhar-cliente/${resposta.id}/true`]);
+  }
+
+  editarCliente(resposta){
+    this.router.navigate([`editar-cliente/${resposta.id}/false`]);
+  }
+
+  excluirCliente(resposta){
+    this.clienteService.excluirCliente(resposta.id).subscribe(response =>{
+      this.buscarClientes();
+    })
+  }
+
+  retornaTelaDeCadastro() {
+    this.router.navigate([`cadastro-cliente`]);
   }
 
 }

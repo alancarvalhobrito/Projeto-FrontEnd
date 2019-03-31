@@ -1,9 +1,4 @@
-.formulario{
-    width: 32em;
-    margin-left: 5%;
-}
-
-.btn-convenio{
+.btn-cliente{
     background: #14578f !important;
     color: #fff;
     margin-right: 1em;
@@ -32,9 +27,63 @@
 .botoes{
     margin-top: 3em;
     width: 40%;
-    margin-left: 32%;
+    margin-bottom: 5em;
 }
 
 .input{
     float: right;
+    margin-right: 20%;
+    margin-top: -12px;
+    width: 22em;
+}
+
+.p-input{
+    float: right;
+    margin-right: 20%;
+    margin-top: -12px;
+}
+
+.label{
+    margin: 0 8.4em 0.4em 1em;
+    color: #848484;
+}
+
+.btn-add{
+    width: 12em;
+    margin-left: 1em !important;
+}
+
+.table{
+    margin-bottom: 5em !important;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: super;
+}
+
+th {
+background-color: #14578f;
+color: white;
+text-align: center;
+}
+
+td{
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2
+}
+
+.coluna{
+    text-align: center;
+}
+
+.btn-acao{
+    margin-left: 37%;
 }

@@ -1,80 +1,200 @@
 <div class="ui-g div-titulo">
-  <div class="ui-g-12" *ngIf="!isDisabled">
-    <h3 class="titulo">Cadastro cliente</h3>
+    <div class="ui-g-12" *ngIf="!isDetalhamento && !isEdicao">
+      <h3 class="titulo">Cadastro cliente</h3>
+    </div>
+    <div class="ui-g-12" *ngIf="isDetalhamento">
+      <h3 class="titulo">Detalhar cliente</h3>
+    </div>
+    <div class="ui-g-12" *ngIf="isEdicao">
+      <h3 class="titulo">Editar cliente</h3>
+    </div>
   </div>
-</div>
 
 <form [formGroup]="formularioCliente" (ngSubmit)="salvar()">
-  <div class="formulario">
-    <div class="ui-g-6">
-        <span class="ui-float-label">
-            <label for="float-input">Nome:</label>
-            <input class="input" id="float-input" type="text" size="40" [(ngModel)]="cliente.nome" name="nome"
-          formControlName="nome" pInputText required maxlength="100"/>
-        </span>
-      </div>
-
-      <div class="ui-g-6">
+  <div class="ui-g-6">
+      <div class="ui-g-12">
           <span class="ui-float-label">
-            <label for="float-input">CPF:</label>
-            <input class="input" id="float-input" type="text" size="40" [(ngModel)]="cliente.cpf" name="cpf"
-              formControlName="cpf" pInputText required/>
+              <label for="float-input">Nome:</label>
+              <input class="input" type="text" size="40" [(ngModel)]="cliente.nome" name="nome"
+            formControlName="nome" pInputText required maxlength="100" [attr.disabled]="isDetalhamento ? '': null"/>
           </span>
         </div>
 
       <div class="ui-g-12">
-          <div class="ui-g-6">
-              <span class="ui-float-label">
-                <label for="float-input">CEP:</label>
-                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.cep" name="cep"
-                  formControlName="cep" required (ngModelChange)="buscarCep()" maxlength="8"/>
-              </span>
-            </div>
+          <span class="ui-float-label">
+            <label for="float-input">CPF:</label>
+            <p-inputMask class="p-input" type="text" size="40" [(ngModel)]="cliente.cpf" name="cpf"
+              formControlName="cpf" pInputText required mask="999.999.999-99" [disabled]="isDetalhamento"></p-inputMask>
+          </span>
+        </div>
 
-          <div class="ui-g-6">
-              <span class="ui-float-label">
-                <label for="float-input">Logradouro:</label>
-                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.logradouro" name="logradouro"
-                  formControlName="logradouro" pInputText required/>
-              </span>
-            </div>
+      <div class="ui-g-12">
+          <span class="ui-float-label">
+            <label for="float-input">CEP:</label>
+            <p-inputMask class="p-input" type="text" size="40" [(ngModel)]="endereco.cep" name="cep"
+              formControlName="cep" required (ngModelChange)="buscarCep()" mask="99999-999" placeholder="00000-000" [disabled]="isDetalhamento"></p-inputMask>
+          </span>
+        </div>
 
-          <div class="ui-g-6">
-              <span class="ui-float-label">
-                <label for="float-input">Bairro:</label>
-                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.bairro" name="bairro"
-                  formControlName="bairro" pInputText required/>
-              </span>
-            </div>
+      <div class="ui-g-12">
+          <span class="ui-float-label">
+            <label for="float-input">Logradouro:</label>
+            <input class="input" type="text" size="40" [(ngModel)]="endereco.logradouro" name="logradouro"
+              formControlName="logradouro" pInputText required [attr.disabled]="isDetalhamento ? '': null"/>
+          </span>
+        </div>
 
-          <div class="ui-g-6">
-              <span class="ui-float-label">
-                <label for="float-input">Cidade:</label>
-                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.cidade" name="cidade"
-                  formControlName="cidade" pInputText required/>
-              </span>
-            </div>
+      <div class="ui-g-12">
+          <span class="ui-float-label">
+            <label for="float-input">Bairro:</label>
+            <input class="input" type="text" size="40" [(ngModel)]="endereco.bairro" name="bairro"
+              formControlName="bairro" pInputText required [attr.disabled]="isDetalhamento ? '': null"/>
+          </span>
+        </div>
 
-          <div class="ui-g-6">
-              <span class="ui-float-label">
-                <label for="float-input">UF:</label>
-                <input class="input" id="float-input" type="text" size="40" [(ngModel)]="endereco.uf" name="uf"
-                  formControlName="uf" pInputTexts required/>
-              </span>
-            </div>
+      <div class="ui-g-12">
+          <span class="ui-float-label">
+            <label for="float-input">Cidade:</label>
+            <input class="input" type="text" size="40" [(ngModel)]="endereco.cidade" name="cidade"
+              formControlName="cidade" pInputText required [attr.disabled]="isDetalhamento ? '': null"/>
+          </span>
+        </div>
 
-          <!--  <div class="ui-g-6">
-                <span class="ui-float-label">
-                  <input id="float-input" type="text" size="50" [(ngModel)]="endereco.complemento" name="complemento"/>
-                  <label for="float-input">Complemento</label>
-                </span>
-              </div> -->
+      <div>
+          <label class="label" for="float-input">UF:</label>
+          <select id="estado" [(ngModel)]="endereco.uf" name="uf" formControlName="uf" required [attr.disabled]="isDetalhamento ? '': null">
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+              <option value="ES">Estrangeiro</option>
+          </select>
       </div>
   </div>
-  <div class="botoes">
-      <button type="button" class="btn btn-convenio" >SALVAR</button>
-      <button type="button" class="btn btn-convenio" (click)="clear()">LIMPAR</button>
-      <button type="button" class="btn btn-convenio" (click)="consultar()">CONSULTAR</button>
+</form>
+
+<div class="ui-g-6">
+    <div class="ui-g-12">
+          <div class="ui-g-12"><h4>Telefone:</h4></div>
+          <div>
+            <label style="margin: 0px 1em 0 0.6em !important" for="float-input">Tipo:</label>
+            <select (focusout)="verificatipoTelefone()" id="tipo" [(ngModel)]="telefone.tipo" name="tipo" [attr.disabled]="isDetalhamento ? '': null">
+                <option value="Celular">Celular</option>
+                <option value="Residencial">Residencial</option>
+                <option value="Comercial">Comercial</option>
+            </select>
+
+            <label style="margin: 0px 1em 0 3em !important;" for="float-input">Número:</label>
+            <p-inputMask *ngIf="!isCelular" type="text" size="40" [(ngModel)]="telefone.numero" name="numero" mask="(99) 9999-9999"
+            (ngModelChange)="verificaBtnAddTelefoneHabilitado()" [disabled]="isDetalhamento"></p-inputMask>
+            <p-inputMask *ngIf="isCelular" type="text" size="40" [(ngModel)]="numeroCelular" name="numero" mask="(99) 9.9999-9999"
+            (ngModelChange)="verificaBtnAddTelefoneHabilitado()" [disabled]="isDetalhamento"></p-inputMask>
+          </div>
+    </div>
+    <button type="button" class="btn btn-cliente btn-add" (click)="adicionarTelefone()" 
+    [attr.disabled]="isDisabledBtnAddTelefone ? '': null">ADICIONAR TELEFONE</button>
+</div>
+
+<div class="ui-g-6" style="margin-top: 2em">
+    <div class="ui-g-12">
+        <label style="margin: 0px 1em 0 0.6em !important" for="float-input">E-mail:</label>
+        <input type="e" size="40" [(ngModel)]="email.email" name="email" placeholder="exemplo@exemplo.com" [attr.disabled]="isDetalhamento ? '': null"/>
+    </div>
+    <button type="button" class="btn btn-cliente btn-add"
+     (click)="adicionarEmail()" [attr.disabled]="email.email == undefined || email.email == '' ? '': null">ADICIONAR E-MAIL</button>
+</div>
+
+<div class="ui-g-6" style="margin-top: -1.8em;">
+    <span class="ui-float-label">
+      <label style="margin-left: 1px" for="float-input">Complemento:</label>
+      <input style="margin-right: 8.6em;" class="input" type="text" size="40" [(ngModel)]="complemento" name="complemento"
+        pInputTexts [attr.disabled]="isDetalhamento ? '': null"/>
+    </span>
   </div>
 
-</form>
+<div class="ui-g-12">
+  <div class="botoes" *ngIf="!isDetalhamento">
+      <button type="button" class="btn btn-cliente" [attr.disabled]="formularioCliente.invalid ? '': null"  (click)="salvar()">SALVAR</button>
+      <button type="button" class="btn btn-cliente" (click)="clear()">LIMPAR</button>
+      <button type="button" class="btn btn-cliente" (click)="retornaTelaDeConculta()">CONSULTAR</button>
+  </div>
+  <div class="ui-g-12" *ngIf="isDetalhamento">
+      <button class="btn btn-cliente" type="button" (click)="editarCliente()">ALTERAR</button>
+      <button class="btn btn-cliente" type="button" (click)="retornaTelaDeConculta()">VOLTAR</button>
+    </div>
+</div>
+
+<div *ngIf="listaTelefone?.length" class="ui-g-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Número</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let telefone of listaTelefone">
+          <tr>
+            <td>{{telefone.tipo}}</td>
+            <td>{{telefone.numero}}</td>
+            <td>
+                <div class="ui-g" style="padding: 0">
+                    <div class="btn-acao">
+                        <button pButton type="button" (click)="excluirTelefone(telefone)" [disabled]="isDetalhamento"> <span class="fa fa-trash"></span></button>
+                    </div>
+                </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="listaEmails?.length" class="ui-g-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>E-mail</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let email of listaEmails">
+            <tr>
+              <td>{{email.email}}</td>
+              <td>
+                  <div class="ui-g" style="padding: 0">
+                      <div class="btn-acao">
+                          <button pButton type="button" (click)="excluirEmail(email)" [disabled]="isDetalhamento"> <span class="fa fa-trash"></span></button>
+                      </div>
+                  </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
